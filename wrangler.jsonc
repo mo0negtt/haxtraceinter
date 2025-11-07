@@ -1,0 +1,5 @@
+{
+  "name": "haxtrace",
+  "compatibility_date": "2025-10-11",
+  "main": "dist/index.js"
+}

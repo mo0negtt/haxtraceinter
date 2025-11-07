@@ -1,0 +1,84 @@
+Esta landing page combina la claridad utilitaria de iLoveHax con la estructura directa de iLoveImg, a la vez que incorpora funciones avanzadas para maximizar la usabilidad y la personalización.
+
+Paleta y tipografía
+Fondo blanco puro (#FFFFFF) y contenedores en gris suave (#F9F9F9).
+
+Texto principal en gris oscuro (#333333); interlineado 1.5; tamaño base 16 px.
+
+Destellos interactivos en azul claro (#2196F3) para hover, foco y enlaces.
+
+Fuente sans-serif genérica, box-sizing: border-box en todos los elementos para consistencia.
+
+Estructura y flujo de usuario
+Hero (30 % altura viewport)
+
+Título principal (“ILoveHax Tools”) en 2 rem; subtítulo en 1 rem, color #555555.
+
+Ligeras animaciones de aparición (opacity + transform) para título y CTA.
+
+Botón flotante de “Dark Mode” en esquina superior derecha, que alterna variables CSS.
+
+Sección de herramientas
+
+Grid responsivo con flex-wrap: wrap; justify-content: center; gap: 2rem.
+
+Dos tarjetas interactivas:
+
+Emphasize (antes iLoveHax)
+
+Editor (antes HaxPuck)
+
+Cada tarjeta incluye icono SVG/PNG (64×64 px), título en 1.2 rem y descripción en 0.9 rem.
+
+Footer
+
+Texto centrado en 0.8 rem, color #777777.
+
+Enlaces legales (Privacidad, Términos) y redes sociales con iconos SVG.
+
+Comportamiento de las tarjetas
+Hover: transform: translateY(-4px) + cambio de borde a --accent.
+
+Focus (Teclado): outline: none; box-shadow: 0 0 0 3px rgba(33,150,243,0.3).
+
+Click / Tap: al presionar Emphasize, redirige a https://mo0negtt.github.io/ilovehax/; al presionar Editor, a https://mo0negtt.github.io/haxpuck/.
+
+Apertura en pestaña nueva (target="_blank"), manteniendo la landing disponible.
+
+Funciones avanzadas
+1. Dark Mode + Theming
+Toggle en header que cambia variables CSS (--bg, --text, --card-bg).
+
+Guardado en localStorage para recordar la preferencia.
+
+2. Presets del usuario
+Icono de usuario en header: menú desplegable con “Mis presets” y “Cerrar sesión”.
+
+Capacidad de guardar configuraciones frecuentes de Emphasize y Editor en la cuenta.
+
+3. Búsqueda y filtrado
+Barra de búsqueda global para filtrar herramientas o presets por nombre/etiqueta.
+
+Autocompletado basado en metadata (ej. “grid”, “color”, “física”).
+
+4. Atajos de teclado
+E abre Emphasize; D abre Editor.
+
+/? abre la ayuda en overlay.
+
+5. Estadísticas y feedback
+Panel oculto accesible mediante un icono en el footer: muestra número de usuarios activos, cargas realizas y métricas de rendimiento.
+
+Formulario rápido de feedback en modal, enviando comentarios directamente a un webhook.
+
+6. PWA (Progressive Web App)
+Service Worker que cachea los assets de la landing para acceso offline.
+
+Manifest.json configurado con íconos adaptativos y nombre de la app.
+
+Accesibilidad y responsividad
+WCAG AA: contraste ≥ 4.5:1 en texto y controles.
+
+Responsive desde 320 px a 1920 px: tarjetas pasan a full-width en móvil con max-width: 300px.
+
+Navegación 100 % teclado y ARIA labels en botones y enlaces.

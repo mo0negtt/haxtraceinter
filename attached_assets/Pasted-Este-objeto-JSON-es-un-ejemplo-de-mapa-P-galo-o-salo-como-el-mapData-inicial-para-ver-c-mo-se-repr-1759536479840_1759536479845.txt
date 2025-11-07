@@ -1,0 +1,82 @@
+Este objeto JSON es un ejemplo de mapa. Pégalo o úsalo como el mapData inicial para ver cómo se representa en la página y qué modificar. Usa la UI (Add Vertex, Add Segment, Background, etc.) o reemplaza el this.data en mapData.js para cargarlo directamente.
+
+Copia el JSON siguiente completo:
+
+{
+  "name": "HaxTrace",
+  "width": 420,
+  "height": 200,
+  "cameraWidth": 0,
+  "cameraHeight": 0,
+  "maxViewWidth": 0,
+  "cameraFollow": "ball",
+  "spawnDistance": 170,
+  "canBeStored": true,
+  "kickOffReset": "partial",
+  "bg": { "color": "718C5A" },
+  "traits": {
+    "ballArea": { "vis": false, "bCoef": 1, "cMask": ["ball"] },
+    "goalPost": { "radius": 8, "invMass": 0, "bCoef": 0.5 },
+    "goalNet": { "vis": true, "bCoef": 0.1, "cMask": ["ball"] },
+    "kickOffBarrier": { "vis": false, "bCoef": 0.1, "cGroup": ["redKO","blueKO"], "cMask": ["red","blue"] }
+  },
+  "vertexes": [
+    { "x": -115, "y": -87.9921875 },
+    { "x": 74, "y": -89.9921875 },
+    { "x": 74, "y": 108.0078125, "_comment": "" }
+  ],
+  "segments": [
+    { "v0": 0, "v1": 1 },
+    { "v0": 1, "v1": 2, "_comment": "" },
+    { "v0": 0, "v1": 2, "curve": -90.56402280711765, "_comment": "" },
+    { "v0": 2, "v1": 0, "curve": -90.56402280711765, "_comment": "" }
+  ],
+  "goals": [],
+  "discs": [],
+  "planes": [],
+  "joints": [],
+  "redSpawnPoints": [],
+  "blueSpawnPoints": [],
+  "playerPhysics": {
+    "radius": 15,
+    "bCoef": 0.5,
+    "invMass": 0.5,
+    "damping": 0.96,
+    "cGroup": ["red","blue"],
+    "acceleration": 0.1,
+    "gravity": [0,0],
+    "kickingAcceleration": 0.07,
+    "kickingDamping": 0.96,
+    "kickStrength": 5,
+    "kickback": 0
+  },
+  "ballPhysics": {
+    "pos": [0,0],
+    "radius": 10,
+    "bCoef": 0.5,
+    "cMask": ["all"],
+    "damping": 0.99,
+    "invMass": 1,
+    "gravity": [0,0],
+    "color": "ffffff",
+    "cGroup": ["ball"]
+  }
+}
+
+Notas y pasos rápidos
+
+Dónde pegar
+Opción A: sustituir this.data en mapData.js (ya incluido en este repo si lo quieres como mapa por defecto).
+Opción B: en la UI usar Import → seleccionar un archivo .hbs/.json con ese contenido.
+Fondo obligatorio
+El editor permite cargar una imagen de fondo (Background). Se recomienda cargar una imagen para alinear vértices visualmente. La imagen se guarda en el .hbs exportado (DataURL + metadata).
+Curvas
+El campo curve controla la curvatura de un segmento. El editor aplica una convención de signo que puede invertirse en export/import por compatibilidad (se documenta en la UI). Puedes editar curvas en el panel Curve o arrastrando segmentos con el botón derecho.
+Cómo probar
+Abre la vista previa (Live preview) en Replit o carga index.html en el navegador.
+Si pegaste el JSON en mapData.js, recarga la página para ver el mapa.
+Usa Add Vertex / Add Segment para modificar, mueve vértices con botón derecho, edita curva en el panel flotante.
+Para obtener el archivo listo para Haxball: clic en Export HBS (descarga .hbs/JSON).
+Para probar en HaxPuck: hay un botón en la UI “Open HaxPuck” que abre https://mo0negtt.github.io/haxpuck/.
+Créditos
+En la UI añadí un botón Credits con @mo0negtt y @mush.
