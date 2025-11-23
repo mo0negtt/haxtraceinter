@@ -10,6 +10,58 @@ The interface follows a modern, minimalist dark design with left sidebar navigat
 
 Preferred communication style: Simple, everyday language.
 
+## Replit Setup (November 23, 2025)
+
+Successfully configured HaxTrace for the Replit environment:
+- **Dependencies**: All npm packages installed successfully
+- **Development Server**: Configured on port 5000 with allowedHosts for Replit proxy compatibility
+- **Workflow**: "HaxTrace Dev Server" runs `npm run dev` and serves on port 5000
+- **Build Process**: Verified production build works (vite build + esbuild for server)
+- **Deployment**: Configured for autoscale deployment with build and run commands
+- **Fixed Issues**:
+  - Added missing `GameMap` type export in schema
+  - Added `createdAt` and `updatedAt` fields to map schema
+  - Created comprehensive .gitignore for Node.js project
+- **Storage**: Currently using in-memory storage (MemStorage) for maps
+- **Frontend Access**: Application accessible via Replit webview on port 5000
+
+## Latest Updates (November 23, 2025)
+
+**UI and Feature Enhancements**:
+- **Social Media Integration**: Replaced Discord buttons with TikTok links (@mo0negtt)
+  - Updated both left sidebar and top bar buttons
+  - TikTok button styled with black background matching brand
+  - Updated About dialog with new features list
+- **Background Color Fix**: Fixed map background color rendering bug
+  - Normalized color format in canvas renderer to always include `#` prefix
+  - Ensures consistent color display across import/export
+
+**Advanced Multi-Selection & Editing**:
+- **Multi-Vertex Movement**: Move multiple selected vertices simultaneously
+  - Select vertices with Ctrl+click or marquee selection
+  - Drag any selected vertex to move all selected vertices together
+  - Maintains relative positions during group movement
+- **Universal Ctrl Selection**: Select vertices/segments with Ctrl in any tool mode
+  - Pan tool: Ctrl+click to select while in pan mode
+  - Vertex tool: Ctrl+click for multi-selection
+  - Segment tool: Ctrl+click for multi-selection
+  
+**Enhanced Keyboard Shortcuts**:
+- **Tool Switching**: Quick access to tools without clicking
+  - **1 or P**: Switch to Pan/Select tool
+  - **2 or V**: Switch to Vertex tool
+  - **3 or S**: Switch to Segment tool
+- **Selection Commands**:
+  - **Ctrl+A**: Select all vertices on the canvas
+  - **Ctrl+D**: Duplicate selected vertices or segments
+  - **Delete/Backspace**: Delete selected vertices or segments
+  
+**Batch Operations**:
+- Duplicate multiple selected vertices at once (maintains offsets)
+- Duplicate multiple selected segments at once
+- Delete multiple vertices/segments in one action
+- Improved multi-selection workflow for efficient editing
+
 ## Recent Changes (November 2025)
 
 **Complete UI Redesign - Modern Dark Interface (Nov 6, 2025 - Latest)**

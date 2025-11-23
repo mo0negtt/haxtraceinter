@@ -62,13 +62,16 @@ export const mapSchema = z.object({
   joints: z.array(z.any()).optional().default([]),
   traits: z.record(z.any()).optional().default({}),
   canBeStored: z.boolean().optional().default(true),
+  createdAt: z.string(),
+  updatedAt: z.string(),
 });
 
-export const insertMapSchema = mapSchema.omit({ id: true });
+export const insertMapSchema = mapSchema.omit({ id: true, createdAt: true, updatedAt: true });
 
 export type Vertex = z.infer<typeof vertexSchema>;
 export type CurveData = z.infer<typeof curveDataSchema>;
 export type Segment = z.infer<typeof segmentSchema>;
 export type BackgroundImage = z.infer<typeof backgroundImageSchema>;
 export type HaxMap = z.infer<typeof mapSchema>;
+export type GameMap = HaxMap;
 export type InsertMap = z.infer<typeof insertMapSchema>;
