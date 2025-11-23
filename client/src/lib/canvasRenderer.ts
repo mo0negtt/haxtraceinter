@@ -77,7 +77,8 @@ export class CanvasRenderer {
 
   clear(bgColor: string = '#1a1a1a') {
     const rect = this.canvas.getBoundingClientRect();
-    this.ctx.fillStyle = bgColor;
+    const normalizedColor = bgColor.startsWith('#') ? bgColor : `#${bgColor}`;
+    this.ctx.fillStyle = normalizedColor;
     this.ctx.fillRect(0, 0, rect.width, rect.height);
   }
 
