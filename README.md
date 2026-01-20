@@ -1,5 +1,4 @@
 # 🪄 HaxTrace
-> **Vectorized logos and images for Haxball maps**
 
 ---
 
