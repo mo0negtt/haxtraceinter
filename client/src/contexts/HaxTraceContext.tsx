@@ -46,6 +46,7 @@ interface HaxTraceContextType {
   setBackgroundImage: (dataURL: string) => void;
   updateBackgroundImage: (bgImage: BackgroundImage) => void;
   removeBackgroundImage: () => void;
+  newProject: () => void;
   undo: () => void;
   redo: () => void;
   canUndo: boolean;
@@ -101,24 +102,7 @@ export const HaxTraceProvider = ({ children }: HaxTraceProviderProps) => {
     }
     return defaultMap;
   });
-  const [currentTool, setCurrentTool] = useState<Tool>('vertex');
-  const [selectedVertices, setSelectedVertices] = useState<number[]>([]);
-  const [selectedSegments, setSelectedSegments] = useState<number[]>([]);
-  const [hoveredVertex, setHoveredVertex] = useState<number | null>(null);
-  const [segmentColor, setSegmentColor] = useState<string>('ffffff');
-  const [curveType, setCurveType] = useState<'angle' | 'radius' | 'sagitta'>('angle');
-  const [curveValue, setCurveValue] = useState<number>(0);
-  const [gridVisible, setGridVisible] = useState<boolean>(() => {
-    const saved = localStorage.getItem('gridVisible');
-    return saved ? JSON.parse(saved) : true;
-  });
-  const [gridSize, setGridSize] = useState<number>(() => {
-    const saved = localStorage.getItem('gridSize');
-    return saved ? Number(saved) : 50;
-  });
-  const [zoom, setZoomInternal] = useState<number>(1);
-  const [mousePos, setMousePos] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
-  
+
   const initialHistory = (() => {
     const saved = localStorage.getItem('haxtraceMap');
     if (saved) {
@@ -140,6 +124,44 @@ export const HaxTraceProvider = ({ children }: HaxTraceProviderProps) => {
     setMapInternal(newMap);
     localStorage.setItem('haxtraceMap', JSON.stringify(newMap));
   }, [historyIndex]);
+
+  const [currentTool, setCurrentTool] = useState<Tool>('vertex');
+  const [selectedVertices, setSelectedVertices] = useState<number[]>([]);
+  const [selectedSegments, setSelectedSegments] = useState<number[]>([]);
+  const [hoveredVertex, setHoveredVertex] = useState<number | null>(null);
+  const [segmentColor, setSegmentColorInternal] = useState<string>('ffffff');
+  const [curveType, setCurveType] = useState<'angle' | 'radius' | 'sagitta'>('angle');
+  const [curveValue, setCurveValue] = useState<number>(0);
+  const [gridVisible, setGridVisible] = useState<boolean>(() => {
+    const saved = localStorage.getItem('gridVisible');
+    return saved ? JSON.parse(saved) : true;
+  });
+  const [gridSize, setGridSize] = useState<number>(() => {
+    const saved = localStorage.getItem('gridSize');
+    return saved ? Number(saved) : 50;
+  });
+  const [zoom, setZoomInternal] = useState<number>(1);
+  const [mousePos, setMousePos] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
+
+  const setSegmentColor = useCallback((color: string) => {
+    setSegmentColorInternal(color);
+    
+    if (selectedSegments.length > 0) {
+      const newSegments = [...map.segments];
+      selectedSegments.forEach(index => {
+        newSegments[index] = {
+          ...newSegments[index],
+          color: color.startsWith('#') ? color.slice(1) : color
+        };
+      });
+      
+      const newMap = {
+        ...map,
+        segments: newSegments,
+      };
+      saveHistory(newMap);
+    }
+  }, [map, selectedSegments, saveHistory]);
 
   const setMap = useCallback((newMap: HaxMap) => {
     saveHistory(newMap);
@@ -398,6 +420,17 @@ export const HaxTraceProvider = ({ children }: HaxTraceProviderProps) => {
     saveHistory(newMap);
   }, [map, saveHistory]);
 
+  const newProject = useCallback(() => {
+    if (window.confirm('Are you sure you want to start a new project? All unsaved changes will be lost.')) {
+      setHistory([defaultMap]);
+      setHistoryIndex(0);
+      setMapInternal(defaultMap);
+      localStorage.setItem('haxtraceMap', JSON.stringify(defaultMap));
+      setSelectedVertices([]);
+      setSelectedSegments([]);
+    }
+  }, []);
+
   const undo = useCallback(() => {
     if (historyIndex > 0) {
       const newMap = history[historyIndex - 1];
@@ -572,6 +605,7 @@ export const HaxTraceProvider = ({ children }: HaxTraceProviderProps) => {
     setBackgroundImage,
     updateBackgroundImage,
     removeBackgroundImage,
+    newProject,
     undo,
     redo,
     canUndo: historyIndex > 0,
