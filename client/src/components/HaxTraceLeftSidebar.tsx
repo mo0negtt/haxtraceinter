@@ -232,21 +232,7 @@ export const HaxTraceLeftSidebar = () => {
             <div className="space-y-3">
               <h3 className="text-xs font-semibold tracking-wide uppercase text-muted-foreground">Links</h3>
               <div className="flex flex-col gap-2">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => {
-                    const win = window.open("https://mo0negtt.github.io/HaxPuck/", "_blank");
-                    if (win) {
-                      win.opener = null;
-                    }
-                  }}
-                  className="flex items-center justify-start gap-2 h-9"
-                  data-testid="button-haxpuck"
-                >
-                  <ExternalLink className="w-4 h-4" />
-                  Visit HaxPuck
-                </Button>
+               
                 <Button
                   variant="outline"
                   size="sm"
